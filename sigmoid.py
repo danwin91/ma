@@ -1,13 +1,18 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__))
+plotpath = os.path.join(dir_path, "plots")
 
 desc = {'g':["sigmoid"],'dg':["bka"],'ddg':["dtrr"], 'dddg':["test"]}
 
-def plot_sigmoid():
+def plot_sigmoid(filename = "sigmoid.pdf"):
+    filepath = os.path.join(plotpath, filename)
     lin = np.linspace(-2,2, 100)
     plt.rc('text', usetex=True)
     plt.rc('font', family='sans')
-    _, pltarr = plt.subplots(2,2,figsize=(10,10))
+    _, pltarr = plt.subplots(2,2, figsize=(12,12))
     pltarr[0,0].plot(lin,g(lin))
     pltarr[0,0].set_xlabel(r"$x$")
     pltarr[0,0].axhline(y=0, color="black")
@@ -28,6 +33,7 @@ def plot_sigmoid():
     pltarr[1,1].set_title(r"$\sigma'''$", fontsize=16)
     pltarr[1,1].set_xlabel(r"$x$")
     pltarr[1,1].set_ylabel(r"$\sigma'''(x)$")
+    plt.savefig(filepath, format='pdf', dpi=1200)
 
 
 def g(x):

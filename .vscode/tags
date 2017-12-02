@@ -4,4 +4,30 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-test.py	../test.py	1;"	kind:file	line:1
+create_plots.py	../create_plots.py	1;"	kind:file	line:1
+dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:62
+dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:36
+dddg	../sigmoid.py	/^def dddg(x):$/;"	kind:function	line:43
+dddg	../tanh.py	/^def dddg(x):$/;"	kind:function	line:42
+ddf	../main_function.py	/^def ddf(X,a,b):$/;"	kind:function	line:20
+ddg	../sigmoid.py	/^def ddg(x):$/;"	kind:function	line:40
+ddg	../tanh.py	/^def ddg(x):$/;"	kind:function	line:39
+desc	../sigmoid.py	/^desc = {'g':["sigmoid"],'dg':["bka"],'ddg':["dtrr"], 'dddg':["test"]}$/;"	kind:variable	line:4
+df	../main_function.py	/^def df(X,a,b):$/;"	kind:function	line:13
+dg	../sigmoid.py	/^def dg(x):$/;"	kind:function	line:36
+dg	../tanh.py	/^def dg(x):$/;"	kind:function	line:35
+f	../main_function.py	/^def f(x,a,b):$/;"	kind:function	line:10
+f_inner	../main_function.py	/^def f_inner(x,A,foo):$/;"	kind:function	line:5
+g	../sigmoid.py	/^def g(x):$/;"	kind:function	line:33
+g	../tanh.py	/^def g(x):$/;"	kind:function	line:32
+main_function.py	../main_function.py	1;"	kind:file	line:1
+myplots.py	../myplots.py	1;"	kind:file	line:1
+plot_sigmoid	../sigmoid.py	/^def plot_sigmoid():$/;"	kind:function	line:6
+plot_singular_values	../myplots.py	/^def plot_singular_values(D, m, m_1, m_x):$/;"	kind:function	line:5
+plot_tanh	../tanh.py	/^def plot_tanh():$/;"	kind:function	line:5
+sigmoid.py	../sigmoid.py	1;"	kind:file	line:1
+tanh.py	../tanh.py	1;"	kind:file	line:1
+tensor2	../tensor_util.py	/^def tensor2(a,b):$/;"	kind:function	line:5
+tensor3	../tensor_util.py	/^def tensor3(a, b, c):$/;"	kind:function	line:21
+tensor_distance_to_columns	../tensor_util.py	/^def tensor_distance_to_columns(vec,U,max_cols=np.infty, mode=2):$/;"	kind:function	line:26
+tensor_util.py	../tensor_util.py	1;"	kind:file	line:1
