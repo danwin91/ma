@@ -4,27 +4,34 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+__init__.py	../plots/__init__.py	1;"	kind:file	line:1
 create_plots.py	../create_plots.py	1;"	kind:file	line:1
 dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:62
 dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:36
-dddg	../sigmoid.py	/^def dddg(x):$/;"	kind:function	line:43
-dddg	../tanh.py	/^def dddg(x):$/;"	kind:function	line:42
+dddg	../sigmoid.py	/^def dddg(x):$/;"	kind:function	line:49
+dddg	../tanh.py	/^def dddg(x):$/;"	kind:function	line:46
 ddf	../main_function.py	/^def ddf(X,a,b):$/;"	kind:function	line:20
-ddg	../sigmoid.py	/^def ddg(x):$/;"	kind:function	line:40
-ddg	../tanh.py	/^def ddg(x):$/;"	kind:function	line:39
-desc	../sigmoid.py	/^desc = {'g':["sigmoid"],'dg':["bka"],'ddg':["dtrr"], 'dddg':["test"]}$/;"	kind:variable	line:4
+ddg	../sigmoid.py	/^def ddg(x):$/;"	kind:function	line:46
+ddg	../tanh.py	/^def ddg(x):$/;"	kind:function	line:43
+desc	../sigmoid.py	/^desc = {'g':["sigmoid"],'dg':["bka"],'ddg':["dtrr"], 'dddg':["test"]}$/;"	kind:variable	line:8
 df	../main_function.py	/^def df(X,a,b):$/;"	kind:function	line:13
-dg	../sigmoid.py	/^def dg(x):$/;"	kind:function	line:36
-dg	../tanh.py	/^def dg(x):$/;"	kind:function	line:35
+dg	../sigmoid.py	/^def dg(x):$/;"	kind:function	line:42
+dg	../tanh.py	/^def dg(x):$/;"	kind:function	line:39
+dir_path	../myplots.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:5
+dir_path	../sigmoid.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:5
+dir_path	../tanh.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:5
 f	../main_function.py	/^def f(x,a,b):$/;"	kind:function	line:10
 f_inner	../main_function.py	/^def f_inner(x,A,foo):$/;"	kind:function	line:5
-g	../sigmoid.py	/^def g(x):$/;"	kind:function	line:33
-g	../tanh.py	/^def g(x):$/;"	kind:function	line:32
+g	../sigmoid.py	/^def g(x):$/;"	kind:function	line:39
+g	../tanh.py	/^def g(x):$/;"	kind:function	line:36
 main_function.py	../main_function.py	1;"	kind:file	line:1
 myplots.py	../myplots.py	1;"	kind:file	line:1
-plot_sigmoid	../sigmoid.py	/^def plot_sigmoid():$/;"	kind:function	line:6
-plot_singular_values	../myplots.py	/^def plot_singular_values(D, m, m_1, m_x):$/;"	kind:function	line:5
-plot_tanh	../tanh.py	/^def plot_tanh():$/;"	kind:function	line:5
+plot_sigmoid	../sigmoid.py	/^def plot_sigmoid(filename = "sigmoid.pdf"):$/;"	kind:function	line:10
+plot_singular_values	../myplots.py	/^def plot_singular_values(D, m, m_1, m_x, der, filename):$/;"	kind:function	line:11
+plot_tanh	../tanh.py	/^def plot_tanh(filename = "tanh.pdf"):$/;"	kind:function	line:8
+plotpath	../myplots.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
+plotpath	../sigmoid.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
+plotpath	../tanh.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
 sigmoid.py	../sigmoid.py	1;"	kind:file	line:1
 tanh.py	../tanh.py	1;"	kind:file	line:1
 tensor2	../tensor_util.py	/^def tensor2(a,b):$/;"	kind:function	line:5
