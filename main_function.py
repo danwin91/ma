@@ -1,7 +1,13 @@
 import numpy as np
-from sigmoid import g,dg,ddg,dddg
+from tanh import g,dg,ddg,dddg
 from tensor_util import tensor2, tensor3
 
+"""
+def g(x):
+    return np.exp(x)
+
+dddg = ddg = dg = g
+"""
 def f_inner(x,A,foo):
     m = len(x)
     v = [foo(np.dot(x,A[:, i])) for i in range(m)]

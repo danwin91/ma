@@ -5,7 +5,6 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 __init__.py	../plots/__init__.py	1;"	kind:file	line:1
-create_plots.py	../create_plots.py	1;"	kind:file	line:1
 dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:62
 dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:36
 dddg	../sigmoid.py	/^def dddg(x):$/;"	kind:function	line:49
@@ -28,6 +27,8 @@ main_function.py	../main_function.py	1;"	kind:file	line:1
 myplots.py	../myplots.py	1;"	kind:file	line:1
 plot_sigmoid	../sigmoid.py	/^def plot_sigmoid(filename = "sigmoid.pdf"):$/;"	kind:function	line:10
 plot_singular_values	../myplots.py	/^def plot_singular_values(D, m, m_1, m_x, der, filename):$/;"	kind:function	line:11
+plot_summary_dist	../myplots.py	/^def plot_summary_dist(m_vec, y1, y1_label, y2, y2_label, y3, y3_label,title,  filename):$/;"	kind:function	line:20
+plot_summary_ratio	../myplots.py	/^def plot_summary_ratio(m_vec, y1, y1_label, y2, y2_label, title, filename):$/;"	kind:function	line:31
 plot_tanh	../tanh.py	/^def plot_tanh(filename = "tanh.pdf"):$/;"	kind:function	line:8
 plotpath	../myplots.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
 plotpath	../sigmoid.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
