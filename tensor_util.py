@@ -38,3 +38,29 @@ def tensor_distance_to_columns(vec,U,max_cols=np.infty, mode=2):
         d2 = np.linalg.norm(-t_vec - U[:, i])
         dist.append(np.min([d1,d2]))
     return dist
+
+
+
+
+def vectorize_symm_tensor(t):
+    mode = len(t.shape)
+    d = t.shape[0]
+    if mode == 2:
+        ret = np.zeros(int(d*(d+1)/2))
+        ind = 0
+        for i in range(d):
+            for j in range(i+1):
+                ret[ind] = t[j][i]
+                ind += 1
+
+    elif mode == 3:
+        ret = np.zeros(int(d*(d+1)*(d+2)/6.0))
+        ind = 0
+        for i in range(d):
+            for j in range(i+1):
+                for k in range(j+1):
+                    ret[ind] = t[k][j][i]
+                    ind += 1
+
+    return ret
+

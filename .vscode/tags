@@ -4,25 +4,29 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+BIG_MATRIX	../tftest.py	/^BIG_MATRIX = np.random.random(size=shape)$/;"	kind:variable	line:5
 __init__.py	../plots/__init__.py	1;"	kind:file	line:1
-dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:62
-dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:36
+dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:68
+dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:42
 dddg	../sigmoid.py	/^def dddg(x):$/;"	kind:function	line:49
 dddg	../tanh.py	/^def dddg(x):$/;"	kind:function	line:46
-ddf	../main_function.py	/^def ddf(X,a,b):$/;"	kind:function	line:20
+ddf	../main_function.py	/^def ddf(X,a,b):$/;"	kind:function	line:26
 ddg	../sigmoid.py	/^def ddg(x):$/;"	kind:function	line:46
 ddg	../tanh.py	/^def ddg(x):$/;"	kind:function	line:43
 desc	../sigmoid.py	/^desc = {'g':["sigmoid"],'dg':["bka"],'ddg':["dtrr"], 'dddg':["test"]}$/;"	kind:variable	line:8
-df	../main_function.py	/^def df(X,a,b):$/;"	kind:function	line:13
+df	../main_function.py	/^def df(X,a,b):$/;"	kind:function	line:19
 dg	../sigmoid.py	/^def dg(x):$/;"	kind:function	line:42
 dg	../tanh.py	/^def dg(x):$/;"	kind:function	line:39
 dir_path	../myplots.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:5
 dir_path	../sigmoid.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:5
 dir_path	../tanh.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:5
-f	../main_function.py	/^def f(x,a,b):$/;"	kind:function	line:10
-f_inner	../main_function.py	/^def f_inner(x,A,foo):$/;"	kind:function	line:5
+end	../tftest.py	/^end = time.time()$/;"	kind:variable	line:13
+end	../tftest.py	/^end = time.time()$/;"	kind:variable	line:23
+f	../main_function.py	/^def f(x,a,b):$/;"	kind:function	line:16
+f_inner	../main_function.py	/^def f_inner(x,A,foo):$/;"	kind:function	line:11
 g	../sigmoid.py	/^def g(x):$/;"	kind:function	line:39
 g	../tanh.py	/^def g(x):$/;"	kind:function	line:36
+m	../tftest.py	/^m = tf.placeholder(tf.float32, shape=shape)$/;"	kind:variable	line:16
 main_function.py	../main_function.py	1;"	kind:file	line:1
 myplots.py	../myplots.py	1;"	kind:file	line:1
 plot_sigmoid	../sigmoid.py	/^def plot_sigmoid(filename = "sigmoid.pdf"):$/;"	kind:function	line:10
@@ -33,9 +37,14 @@ plot_tanh	../tanh.py	/^def plot_tanh(filename = "tanh.pdf"):$/;"	kind:function	l
 plotpath	../myplots.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
 plotpath	../sigmoid.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
 plotpath	../tanh.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
+shape	../tftest.py	/^shape = (20000,2000)$/;"	kind:variable	line:4
 sigmoid.py	../sigmoid.py	1;"	kind:file	line:1
+start	../tftest.py	/^start = time.time()$/;"	kind:variable	line:10
+start	../tftest.py	/^start = time.time()$/;"	kind:variable	line:19
 tanh.py	../tanh.py	1;"	kind:file	line:1
 tensor2	../tensor_util.py	/^def tensor2(a,b):$/;"	kind:function	line:5
 tensor3	../tensor_util.py	/^def tensor3(a, b, c):$/;"	kind:function	line:21
 tensor_distance_to_columns	../tensor_util.py	/^def tensor_distance_to_columns(vec,U,max_cols=np.infty, mode=2):$/;"	kind:function	line:26
 tensor_util.py	../tensor_util.py	1;"	kind:file	line:1
+tf_svd	../tftest.py	/^tf_svd = tf.svd(m, compute_uv = True)$/;"	kind:variable	line:17
+tftest.py	../tftest.py	1;"	kind:file	line:1
