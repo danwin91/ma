@@ -4,25 +4,26 @@ from tensor_util import tensor2, tensor3
 
 """
 def g(x):
-    return np.exp(x)
+    return x-x+0.5
 
 dddg = ddg = dg = g
 """
 def f_inner(x,A,foo):
-    d, m = A.shape
-    v = [foo(np.dot(x,A[:, i])) for i in range(m)]
-    return np.array(v)
+    return foo(A.T.dot(x))
 
-def f(x,a,b):
-    return g(np.dot(b[:,0],f_inner(x,a,g)))
+def f(x,A,B):
+    return np.sum(g(B.T.dot(g(A.T.dot(x)))))
 
-def df(X,a,b):
+def df(X,A,B):
     ret = []
-    for x in X: 
-        right = np.dot(A, b[:,0]*f_inner(x,a,dg))
-        ret.append(dg(np.dot(b[:,0],f_inner(x,a,g)))*right)
+    for x in X:
+        #V = A diag(dg(A^T x)) B in R^dxm_1
+        V = A.dot(np.diag(dg(A.T.dot(x))).dot(B))
+        inner = f_inner(x,A,g)
+        dH = dg(B.T.dot(g(A.T.dot(x))))
+        ret.append(V.dot(dH))
     return ret
-
+"""
 def ddf(X,a,b):
     ret = []
     samples = len(X)
@@ -37,7 +38,28 @@ def ddf(X,a,b):
             temp += b[i,0]*ddg(np.dot(a[:,i],x))*np.tensordot(a[:,i],a[:,i],axes=0)
         r = term1 + term2*temp
         ret.append(r)
+    
+    
+    
     return ret
+"""
+def ddf(X,A,B):
+    ret = []
+
+    for x in X:
+        #term1 containing v_e:
+        V = A.dot(np.diag(dg(A.T.dot(x))).dot(B))
+        term1 = V.dot(np.diag(ddg(B.T.dot(g(A.T.dot(x))))).dot(V.T))
+        
+        #factor, -> diagonal BH*g''(A^Tx)
+        dH = dg(B.T.dot(g(A.T.dot(x))))
+        factor = B.dot(dH)*ddg(A.T.dot(x))
+        term2 = A.dot(np.diag(factor).dot(A.T))
+        ret.append(term1+term2)
+    
+    return ret
+
+
 
 def dddf_single(x, A,B):
     #consists of 4m+m_1 terms seperated into 3 terms pure, semi, mixed

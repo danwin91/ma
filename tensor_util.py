@@ -1,20 +1,6 @@
 import numpy as np 
 
-
-
 def tensor2(a,b):
-    """Calculates the tensorproduct of two vectors
-    Parameters
-    ----------
-    param1 : vector
-        The first vector.
-    param2 : vector
-        The second vector.
-    Returns
-    -------
-    2-mode tensor
-        tensorproduct of a,b of size m x n
-    """
     return np.tensordot(a,b, axes=0)
 
 
@@ -63,4 +49,3 @@ def vectorize_symm_tensor(t):
                     ind += 1
 
     return ret
-
