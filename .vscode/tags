@@ -6,6 +6,7 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 BIG_MATRIX	../tftest.py	/^BIG_MATRIX = np.random.random(size=shape)$/;"	kind:variable	line:5
 __init__.py	../plots/__init__.py	1;"	kind:file	line:1
+algo1	../decomp_algorithm.py	/^def algo1(X, Te, gamma = 1.1, n = 10):$/;"	kind:function	line:21
 dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:90
 dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:64
 dddg	../sigmoid.py	/^def dddg(x):$/;"	kind:function	line:49
@@ -14,7 +15,7 @@ ddf	../main_function.py	/^def ddf(X,A,B):$/;"	kind:function	line:46
 ddg	../sigmoid.py	/^def ddg(x):$/;"	kind:function	line:46
 ddg	../tanh.py	/^def ddg(x):$/;"	kind:function	line:43
 decomp_algorithm.py	../decomp_algorithm.py	1;"	kind:file	line:1
-decomp_svd	../decomp_algorithm.py	/^def decomp_svd(tensors, symm = True, randomize=False):$/;"	kind:function	line:20
+decomp_svd	../decomp_algorithm.py	/^def decomp_svd(tensors, symm = True, randomize=False):$/;"	kind:function	line:33
 desc	../sigmoid.py	/^desc = {'g':["sigmoid"],'dg':["bka"],'ddg':["dtrr"], 'dddg':["test"]}$/;"	kind:variable	line:8
 df	../main_function.py	/^def df(X,A,B):$/;"	kind:function	line:17
 dg	../sigmoid.py	/^def dg(x):$/;"	kind:function	line:42
@@ -26,6 +27,7 @@ end	../tftest.py	/^end = time.time()$/;"	kind:variable	line:13
 end	../tftest.py	/^end = time.time()$/;"	kind:variable	line:23
 f	../main_function.py	/^def f(x,A,B):$/;"	kind:function	line:14
 f_inner	../main_function.py	/^def f_inner(x,A,foo):$/;"	kind:function	line:11
+g	../main_function.py	/^def g(x):$/;"	kind:function	line:6
 g	../sigmoid.py	/^def g(x):$/;"	kind:function	line:39
 g	../tanh.py	/^def g(x):$/;"	kind:function	line:36
 m	../tftest.py	/^m = tf.placeholder(tf.float32, shape=shape)$/;"	kind:variable	line:16
@@ -41,7 +43,7 @@ plot_tanh	../tanh.py	/^def plot_tanh(filename = "tanh.pdf"):$/;"	kind:function	l
 plotpath	../myplots.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:7
 plotpath	../sigmoid.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
 plotpath	../tanh.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
-run_algorithm	../decomp_algorithm.py	/^def run_algorithm(m,m_1,d,m_x, symm = True, verbose = False):$/;"	kind:function	line:58
+run_algorithm	../decomp_algorithm.py	/^def run_algorithm(m,m_1,d,m_x, symm = True, verbose = False):$/;"	kind:function	line:71
 shape	../tftest.py	/^shape = (20000,2000)$/;"	kind:variable	line:4
 sigmoid.py	../sigmoid.py	1;"	kind:file	line:1
 start	../tftest.py	/^start = time.time()$/;"	kind:variable	line:10

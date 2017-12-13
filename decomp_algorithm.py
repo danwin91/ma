@@ -17,6 +17,19 @@ def uniformSphere(d, m_x):
     return x
 
 
+#Algorithm FOSV:
+def algo1(X, Te, gamma = 1.1, n = 10):
+    dd = X.shape[0]
+    for i in range(n):
+        U, D, V = np.linalg.svd(X, full_matrices=True)
+        D[0] *= gamma
+        D=D/np.linalg.norm(D)
+        X = U.dot(np.diag(D).dot(V))
+        X = np.reshape(X, dd**2)
+        #Project on space spanned by T:
+        X=np.reshape(Te.dot(Te.T.dot(X)), (dd,dd))
+    return X
+
 def decomp_svd(tensors, symm = True, randomize=False):
     """tbd.
 
@@ -55,7 +68,11 @@ def decomp_svd(tensors, symm = True, randomize=False):
 
 
 
-def run_algorithm(m,m_1,d,m_x, symm = True, verbose = False):
+def run_algorithm(m,m_1,d,m_x,g_name, symm = True, verbose = False, mode = [2,3]):
+
+    if verbose:
+        print("[run_alg] Trying to set g = {}".format(g_name))
+    set_g(g_name)
     if verbose:
         start  = time.time()
         print("[run_alg] Creating data...")
@@ -69,33 +86,54 @@ def run_algorithm(m,m_1,d,m_x, symm = True, verbose = False):
     #B = np.identity(m)[:,:m_1]
     B = np.transpose(B)
 
+    assert mode == [2,3] or mode == [2] or mode == [3], "invalid mode configuration"
+    if 2 not in mode:
+        ret_2 = None
+    if 3 not in mode:
+        ret_3 = None
+
     if verbose:
         tmp1 = time.time()
-        print("[run_alg] Finished creating data, time elapsed {}".format(tmp1 - start))
-        print("[run_alg] Calculating second derivative...")
-    #Calculating the derivatives for all samples X 
-    ddf_values = ddf(X,A,B)
-    if verbose:
-        tmp2 = time.time()
-        print("[run_alg] Finished second derivative, time elapsed {}".format(tmp2 - tmp1))
-        print("[run_alg] Calculating third derivative...")
-    dddf_values = dddf(X,A,B)
-    if verbose:
-        tmp1 = time.time()
-        print("[run_alg] Finished third derivative, time elapsed {}".format(tmp1 - tmp2))
-        print("[run_alg] Decomposing M_2...")
+        print("[run_alg] Finished creating data, time elapsed {:.2f}s".format(tmp1 - start))
+    
+    if 2 in mode: 
+        if verbose:
+            print("[run_alg] Calculating second derivative...")
+        
+        ddf_values = ddf(X,A,B)
+        
+        if verbose:
+            tmp2 = time.time()
+            print("[run_alg] Finished second derivative, time elapsed {:.2f}s".format(tmp2 - tmp1))
+            print("[run_alg] Decomposing M_2...")
+        
+        U_2, D_2, V_2 = decomp_svd(ddf_values, symm = symm)
+        ret_2 = [U_2, D_2, V_2]
+        if verbose:
+            tmp1 = time.time()
+            print("[run_alg] Finished decomposition of M_2, time elapsed {:.2f}s".format(tmp1 - tmp2))
 
-    U_2, D_2, V_2 = decomp_svd(ddf_values, symm = symm)
-    if verbose:
-        tmp2 = time.time()
-        print("[run_alg] Finished decomposition of M_2, time elapsed {}".format(tmp2 - tmp1))
-        print("[run_alg] Decomposing M_3...")
+    if 3 in mode: 
+        if verbose:
+            print("[run_alg] Calculating third derivative...")
+        dddf_values = dddf(X,A,B)
 
-    U_3, D_3, V_3 = decomp_svd(dddf_values, symm = symm)
-    if verbose:
-        tmp1 = time.time()
-        print("[run_alg] Finished decomposition of M_3, time elapsed {}".format(tmp1 - tmp2))
-        print("[run_alg] Returning, hole execution time: {}".format(tmp1 - start))
+        if verbose:
+            tmp2 = time.time()
+            print("[run_alg] Finished third derivative, time elapsed {:.2f}s".format(tmp2 - tmp1))
+            print("[run_alg] Decomposing M_3...")
 
-    return [U_2, D_2, V_2],[U_3, D_3, V_3], [A,B,X], ddf_values
+        U_3, D_3, V_3 = decomp_svd(dddf_values, symm = symm)
+        ret_3 = [U_3, D_3, V_3]
+
+        if verbose:
+            tmp1 = time.time()
+            print("[run_alg] Finished decomposition of M_3, time elapsed {:.2f}s".format(tmp1 - tmp2))
+            
+       
+    if verbose:   
+        print("[run_alg] Returning, hole execution time: {:.2f}s".format(tmp1 - start))
+
+
+    return ret_2, ret_3, [A,B,X], ddf_values
 

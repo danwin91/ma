@@ -1,13 +1,27 @@
 import numpy as np
-from sigmoid import g,dg,ddg,dddg
+import sigmoid
+import tanh
 from tensor_util import tensor2, tensor3
 
-"""
-def g(x):
-    return x-x+0.5
 
-dddg = ddg = dg = g
-"""
+valid_function_names = ["sigmoid", "tanh", "exp", "constant"]
+
+
+
+def set_g(g_name):
+    global g,dg,ddg,dddg
+ 
+    assert g_name in valid_function_names, "[main_function.py] Unknown function"
+ 
+    print("[main_function.py] Found {}, setting g={}".format(g_name, g_name))
+    if g_name == "sigmoid":
+        g,dg,ddg,dddg, = sigmoid.g, sigmoid.dg, sigmoid.ddg, sigmoid.dddg
+    elif g_name == "tanh":
+        g,dg,ddg,dddg, = tanh.g, tanh.dg, tanh.ddg, tanh.dddg
+    elif g_name == "exp":
+        g = dg = ddg = dddg = np.exp
+    
+
 def f_inner(x,A,foo):
     return foo(A.T.dot(x))
 

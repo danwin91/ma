@@ -43,9 +43,10 @@ def plot_summary_ratio(m_vec, y1, y1_label, y2, y2_label, title, filename = None
         plt.savefig(filepath, format='pdf', dpi=1200)
 
 def plot_ratio(D,m,m_1, filename = None):
-    D_vec = [np.sum(D[:k])/np.sum(D) for k in range(1, 2*m+m_1)]
-    plt.plot(range(1,2*m+m_1), np.log(D_vec), "bx-", label="$ratio$")
+    D_vec = [np.sum(D[:k])/np.sum(D) for k in range(1, 1+m+m_1)]
+    plt.plot(range(1,1+m+m_1), D_vec, "bx-", label="$ratio$")
     plt.xlabel(r"$j$")
+    plt.axvline(x=m, color="green", linestyle="--", label=r'$m$')
     plt.axvline(x=m+m_1, color="red", linestyle="--", label=r'$m+m_1$')
     plt.axvline(x=2*m+m_1, color="red", linestyle="-", label=r'$2m+m_1$')
     plt.ylabel(r"$ratio(D_k, j)$")
