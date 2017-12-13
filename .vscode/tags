@@ -7,17 +7,18 @@
 BIG_MATRIX	../tftest.py	/^BIG_MATRIX = np.random.random(size=shape)$/;"	kind:variable	line:5
 __init__.py	../plots/__init__.py	1;"	kind:file	line:1
 algo1	../decomp_algorithm.py	/^def algo1(X, Te, gamma = 1.1, n = 10):$/;"	kind:function	line:21
-dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:90
-dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:64
+d	../visualize.py	/^    d = json.load(json_data)$/;"	kind:variable	line:8
+dddf	../main_function.py	/^def dddf(X,A,B):$/;"	kind:function	line:104
+dddf_single	../main_function.py	/^def dddf_single(x, A,B):$/;"	kind:function	line:78
 dddg	../sigmoid.py	/^def dddg(x):$/;"	kind:function	line:49
 dddg	../tanh.py	/^def dddg(x):$/;"	kind:function	line:46
-ddf	../main_function.py	/^def ddf(X,A,B):$/;"	kind:function	line:46
+ddf	../main_function.py	/^def ddf(X,A,B):$/;"	kind:function	line:60
 ddg	../sigmoid.py	/^def ddg(x):$/;"	kind:function	line:46
 ddg	../tanh.py	/^def ddg(x):$/;"	kind:function	line:43
 decomp_algorithm.py	../decomp_algorithm.py	1;"	kind:file	line:1
 decomp_svd	../decomp_algorithm.py	/^def decomp_svd(tensors, symm = True, randomize=False):$/;"	kind:function	line:33
 desc	../sigmoid.py	/^desc = {'g':["sigmoid"],'dg':["bka"],'ddg':["dtrr"], 'dddg':["test"]}$/;"	kind:variable	line:8
-df	../main_function.py	/^def df(X,A,B):$/;"	kind:function	line:17
+df	../main_function.py	/^def df(X,A,B):$/;"	kind:function	line:31
 dg	../sigmoid.py	/^def dg(x):$/;"	kind:function	line:42
 dg	../tanh.py	/^def dg(x):$/;"	kind:function	line:39
 dir_path	../myplots.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:6
@@ -25,12 +26,14 @@ dir_path	../sigmoid.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$
 dir_path	../tanh.py	/^dir_path = os.path.dirname(os.path.realpath(__file__))$/;"	kind:variable	line:5
 end	../tftest.py	/^end = time.time()$/;"	kind:variable	line:13
 end	../tftest.py	/^end = time.time()$/;"	kind:variable	line:23
-f	../main_function.py	/^def f(x,A,B):$/;"	kind:function	line:14
-f_inner	../main_function.py	/^def f_inner(x,A,foo):$/;"	kind:function	line:11
-g	../main_function.py	/^def g(x):$/;"	kind:function	line:6
+f	../main_function.py	/^def f(x,A,B):$/;"	kind:function	line:28
+f_inner	../main_function.py	/^def f_inner(x,A,foo):$/;"	kind:function	line:25
 g	../sigmoid.py	/^def g(x):$/;"	kind:function	line:39
 g	../tanh.py	/^def g(x):$/;"	kind:function	line:36
+g_name	../main.py	/^g_name = "tanh"$/;"	kind:variable	line:12
 m	../tftest.py	/^m = tf.placeholder(tf.float32, shape=shape)$/;"	kind:variable	line:16
+main	../main.py	/^def main():$/;"	kind:function	line:15
+main.py	../main.py	1;"	kind:file	line:1
 main_function.py	../main_function.py	1;"	kind:file	line:1
 myplots.py	../myplots.py	1;"	kind:file	line:1
 perm_matrix	../decomp_algorithm.py	/^def perm_matrix(m):$/;"	kind:function	line:7
@@ -43,7 +46,9 @@ plot_tanh	../tanh.py	/^def plot_tanh(filename = "tanh.pdf"):$/;"	kind:function	l
 plotpath	../myplots.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:7
 plotpath	../sigmoid.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
 plotpath	../tanh.py	/^plotpath = os.path.join(dir_path, "plots")$/;"	kind:variable	line:6
-run_algorithm	../decomp_algorithm.py	/^def run_algorithm(m,m_1,d,m_x, symm = True, verbose = False):$/;"	kind:function	line:71
+run_algorithm	../decomp_algorithm.py	/^def run_algorithm(m,m_1,d,m_x,g_name, symm = True, verbose = False, mode = [2,3]):$/;"	kind:function	line:71
+run_sim	../main.py	/^def run_sim(m,m_1,d,m_x=10000):$/;"	kind:function	line:46
+set_g	../main_function.py	/^def set_g(g_name):$/;"	kind:function	line:11
 shape	../tftest.py	/^shape = (20000,2000)$/;"	kind:variable	line:4
 sigmoid.py	../sigmoid.py	1;"	kind:file	line:1
 start	../tftest.py	/^start = time.time()$/;"	kind:variable	line:10
@@ -56,4 +61,6 @@ tensor_util.py	../tensor_util.py	1;"	kind:file	line:1
 tf_svd	../tftest.py	/^tf_svd = tf.svd(m, compute_uv = True)$/;"	kind:variable	line:17
 tftest.py	../tftest.py	1;"	kind:file	line:1
 uniformSphere	../decomp_algorithm.py	/^def uniformSphere(d, m_x):$/;"	kind:function	line:13
+valid_function_names	../main_function.py	/^valid_function_names = ["sigmoid", "tanh", "exp", "constant"]$/;"	kind:variable	line:7
 vectorize_symm_tensor	../tensor_util.py	/^def vectorize_symm_tensor(t):$/;"	kind:function	line:31
+visualize.py	../visualize.py	1;"	kind:file	line:1

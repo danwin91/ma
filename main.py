@@ -9,31 +9,46 @@ import myplots
 from tensor_util import *
 import json
 import time
-g_name = "tanh"
+g_name = "sigmoid"
 
 
 def main():
     results = {'m':[], 'm_1':[], 'd':[], 'm_x':[], 'data':[]}
+    df = {}
+    df["m"] = []
+    df["m_1"] = []
+    df["d"] = []
+    df["m_x"] = []
 
-    for i in range(0,5):
-        m_1 = 2**i
-        for j in range(i,i+3):
-            m = np.max([2**j,2])
-            for k in range(3):
-                d = 10*k+m
-                m_x = 10000
+    df["max_dist_A_m"] = []
+    df["min_dist_A_m"] = []
+    df["max_dist_V_m"] =[]
+    df["min_dist_V_m"] = []
+    df["max_dist_A_m_1"] = []
+    df["min_dist_A_m_1"] = []
+    df["max_dist_V_m_1"] = []
+    df["min_dist_V_m_1"] = []
+    df["error_A_m"] = []
+    df["error_V_m"] = []
+    df["error_A_m_1"] = []
+    df["error_V_m_1"] = []
+    for m_1 in [1, 10, 20]:#5
+        for m in [20, 30, 40]:#3
+            for k in range(11):
+                d = 2*k+m
+                m_x = 8000
                 print("Results for m_1 = {}, m = {}, d = {}, m_x = {}".format(m_1, m,d,m_x))
-                r = run_sim(m, m_1, d, m_x)
+                r = run_sim(m, m_1, d,df, m_x)
                 #results[str((m,m_1,d,m_x))] = r
-                results['m'].append(m)
-                results['m_1'].append(m_1)
-                results['d'].append(d)
-                results['m_x'].append(m_x)
-                results['data'].append(r)
+                df['m'].append(m)
+                df['m_1'].append(m_1)
+                df['d'].append(d)
+                df['m_x'].append(m_x)
+                #df['data'].append(r)
 
     timestr = time.strftime("%Y%m%d-%H%M%S")
-    df = pd.DataFrame(data = results)
-    df.to_csv(g_name+timestr+'.csv')
+    df = pd.DataFrame(data = df)
+    df.to_csv(g_name+timestr+'new.csv')
     
     """
     with open(g_name+timestr+'.json', 'w') as outfile:
@@ -43,7 +58,7 @@ def main():
 
 
 
-def run_sim(m,m_1,d,m_x=10000):
+def run_sim(m,m_1,d, df, m_x=10000):
     #Data
     res_2, res_3, data, ddf = run_algorithm(m,m_1,d,m_x, g_name = g_name,  symm = False, verbose = False, mode = [2])
     if res_2:
@@ -54,7 +69,9 @@ def run_sim(m,m_1,d,m_x=10000):
 
 
 
-    results = []
+    #results = []
+
+
 
     #Tensors of A, AB
     A_tensor = [np.reshape(tensor2(A[:, i], A[:,i]) , d**2) for i in range(A.shape[1])]
@@ -67,7 +84,9 @@ def run_sim(m,m_1,d,m_x=10000):
         proj_dist_m = [np.linalg.norm(L_2[:,:m].dot(L_2[:,:m].T).dot(A_big[:,i]) - A_big[:,i]) for i in range(m)]
         max_proj_dist_A_m = np.max(proj_dist_m)
         min_proj_dist_A_m = np.min(proj_dist_m)
-        results.extend([max_proj_dist_A_m,min_proj_dist_A_m])
+        df["max_dist_A_m"].append(max_proj_dist_A_m)
+        df["min_dist_A_m"].append(min_proj_dist_A_m)
+
         print("Maximal distance P_T(A)={}".format(max_proj_dist_A_m))        
         print("Minimal distance P_T(A)={}".format(min_proj_dist_A_m))
 
@@ -75,7 +94,9 @@ def run_sim(m,m_1,d,m_x=10000):
         projection_dist_Ab_m = [np.linalg.norm(L_2[:,:m].dot(L_2[:,:m].T).dot(Ab_big[:,i]) - Ab_big[:,i]) for i in range(m_1)]
         max_proj_dist_Ab_m = np.max(projection_dist_Ab_m)
         min_proj_dist_Ab_m = np.min(projection_dist_Ab_m)
-        results.extend([max_proj_dist_Ab_m,min_proj_dist_Ab_m])    
+
+        df["max_dist_V_m"].append(max_proj_dist_Ab_m)
+        df["min_dist_V_m"].append(min_proj_dist_Ab_m)  
         print("Maximal distance P_T(Ab)={}".format(max_proj_dist_Ab_m))
         print("Minimal distance P_T(Ab)={}\n".format(min_proj_dist_Ab_m))
 
@@ -84,7 +105,8 @@ def run_sim(m,m_1,d,m_x=10000):
         proj_dist_m1 = [np.linalg.norm(L_2[:,:m+m_1].dot(L_2[:,:m+m_1].T).dot(A_big[:,i]) - A_big[:,i]) for i in range(m)]
         max_proj_dist_A_m1 = np.max(proj_dist_m1)
         min_proj_dist_A_m1 = np.min(proj_dist_m1)
-        results.extend([max_proj_dist_A_m1,min_proj_dist_A_m1])
+        df["max_dist_A_m_1"].append(max_proj_dist_A_m1)
+        df["min_dist_A_m_1"].append(min_proj_dist_A_m1) 
         print("Maximal distance P_T(A)={}".format(max_proj_dist_A_m1))        
         print("Minimal distance P_T(A)={}".format(min_proj_dist_A_m1))
 
@@ -92,7 +114,8 @@ def run_sim(m,m_1,d,m_x=10000):
         projection_dist_Ab_m1 = [np.linalg.norm(L_2[:,:m+m_1].dot(L_2[:,:m+m_1].T).dot(Ab_big[:,i]) - Ab_big[:,i]) for i in range(m_1)]
         max_proj_dist_Ab_m1 = np.max(projection_dist_Ab_m)
         min_proj_dist_Ab_m1 = np.min(projection_dist_Ab_m)
-        results.extend([max_proj_dist_Ab_m1,min_proj_dist_Ab_m1])        
+        df["max_dist_V_m_1"].append(max_proj_dist_Ab_m1)
+        df["min_dist_V_m_1"].append(min_proj_dist_Ab_m1)        
         print("Maximal distance P_T(Ab)={}".format(max_proj_dist_Ab_m))
         print("Minimal distance P_T(Ab)={}\n".format(min_proj_dist_Ab_m))
 
@@ -108,11 +131,11 @@ def run_sim(m,m_1,d,m_x=10000):
         print("Distances A")
         dist_A = [np.min([np.linalg.norm(lal-a), np.linalg.norm(lal +a)]) for a in A_tensor]
         print("Minimal: ",np.min(dist_A))
-        results.append(np.min(dist_A))
+        df["error_A_m"].append(np.min(dist_A))
         print("Distances Ab")
         dist_Ab = [np.min([np.linalg.norm(lal-a), np.linalg.norm(lal +a)]) for a in Ab_tensor]
         print("Minimal: ",np.min(dist_Ab))
-        results.append(np.min(dist_Ab))
+        df["error_V_m"].append(np.min(dist_Ab))
 
 
         print("Reconstruction T_[m+m_1]")
@@ -124,14 +147,14 @@ def run_sim(m,m_1,d,m_x=10000):
         lal = np.reshape(some,d**2)/np.linalg.norm(np.reshape(some,d**2))
         print("Distances A")
         dist_A = [np.min([np.linalg.norm(lal-a), np.linalg.norm(lal +a)]) for a in A_tensor]
-        results.append(np.min(dist_A))
+        df["error_A_m_1"].append(np.min(dist_A))
         print("Minimal: ",np.min(dist_A))
         print("Distances Ab")
         dist_Ab = [np.min([np.linalg.norm(lal-a), np.linalg.norm(lal +a)]) for a in Ab_tensor]
         print("Minimal: ",np.min(dist_Ab))
-        results.append(np.min(dist_Ab))
+        df["error_V_m_1"].append(np.min(dist_Ab))
 
-        return results
+        #return results
 
 
 if __name__ == "__main__":
