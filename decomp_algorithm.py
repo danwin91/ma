@@ -28,6 +28,7 @@ def algo1(X, Te, gamma = 1.1, n = 10):
         X = np.reshape(X, dd**2)
         #Project on space spanned by T:
         X=np.reshape(Te.dot(Te.T.dot(X)), (dd,dd))
+        X = X / np.linalg.norm(X)
     return X
 
 def decomp_svd(tensors, symm = True, randomize=False):
@@ -66,10 +67,18 @@ def decomp_svd(tensors, symm = True, randomize=False):
         U = np.dot(Q,U)
     return U, D, V
 
+def create_data(m,m_1,d):
+    A = ortho_group.rvs(dim = d)[:m]# m orthogonal vectors with dim m, a_1, ..., a_m
+    #A = np.identity(d)[:,:m]
+    A = np.transpose(A)
+    B = ortho_group.rvs(dim = m)[:m_1]#m_1 orthogonal vectors with dimension m b_1, ..., b_m_1
+    #B = np.identity(m)[:,:m_1]
+    B = np.transpose(B)
+    return A,B
 
-
-def run_algorithm(m,m_1,d,m_x,g_name, symm = True, verbose = False, mode = [2,3]):
-
+def run_algorithm(A,B,m_x,g_name, symm = True, verbose = False, mode = [2,3]):
+    d, m = A.shape
+    _, m_1 = B.shape
     if verbose:
         print("[run_alg] Trying to set g = {}".format(g_name))
     set_g(g_name)
@@ -79,12 +88,7 @@ def run_algorithm(m,m_1,d,m_x,g_name, symm = True, verbose = False, mode = [2,3]
     #Create data
     #Setting parameters, and creating data
     X = uniformSphere(d, m_x)
-    A = ortho_group.rvs(dim = d)[:m]# m orthogonal vectors with dim m, a_1, ..., a_m
-    #A = np.identity(d)[:,:m]
-    A = np.transpose(A)
-    B = ortho_group.rvs(dim = m)[:m_1]#m_1 orthogonal vectors with dimension m b_1, ..., b_m_1
-    #B = np.identity(m)[:,:m_1]
-    B = np.transpose(B)
+
 
     assert mode == [2,3] or mode == [2] or mode == [3], "invalid mode configuration"
     if 2 not in mode:
@@ -135,5 +139,5 @@ def run_algorithm(m,m_1,d,m_x,g_name, symm = True, verbose = False, mode = [2,3]
         print("[run_alg] Returning, hole execution time: {:.2f}s".format(tmp1 - start))
 
 
-    return ret_2, ret_3, [A,B,X], ddf_values
+    return ret_2, ret_3, X, ddf_values
 
