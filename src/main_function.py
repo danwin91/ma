@@ -1,7 +1,6 @@
 import numpy as np
-import sigmoid
-import tanh
-from tensor_util import tensor2, tensor3
+from . import tanh, sigmoid
+from .tensor_util import tensor2, tensor3
 
 
 valid_function_names = ["sigmoid", "tanh", "exp", "constant"]

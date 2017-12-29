@@ -1,7 +1,7 @@
 import numpy as np
-import tensor_util
+from . import tensor_util
 from scipy.stats import ortho_group
-from main_function import *
+from .main_function import *
 import time
 
 def perm_matrix(m):
@@ -10,16 +10,37 @@ def perm_matrix(m):
     return P, np.linalg.inv(P)
 
 
-def uniformSphere(d, m_x):
+def uniformSphere(d, m_x, found=[]):
     x = np.random.normal(size=(m_x,d))
     for i in range(m_x):
         x[i] = x[i] / np.linalg.norm(x[i])
+        for a in found:
+            x[i] = x[i] - np.dot(x[i],a)*a    
     return x
 
 
 #Algorithm FOSV:
-def algo1(X, Te, gamma = 1.1, n = 10):
+def algo1(X, Te, gamma = 1.1, n = 10, eps = 0.0000001):
+    #if n = np.infty run until convergence
     dd = X.shape[0]
+
+    if n == np.infty: 
+        cnt = 0
+        while(True):
+            X_old = X
+            U, D, V = np.linalg.svd(X, full_matrices=True)
+            D[0] *= gamma
+            D=D/np.linalg.norm(D)
+            X = U.dot(np.diag(D).dot(V))
+            X = np.reshape(X, dd**2)
+            #Project on space spanned by T:
+            X=np.reshape(Te.dot(Te.T.dot(X)), (dd,dd))
+            X = X / np.linalg.norm(X)
+            cnt += 1
+            if np.linalg.norm(X-X_old) < eps or cnt>100000:
+                print("Algo1 took {} steps".format(cnt))
+                return X         
+        
     for i in range(n):
         U, D, V = np.linalg.svd(X, full_matrices=True)
         D[0] *= gamma
@@ -76,7 +97,7 @@ def create_data(m,m_1,d):
     B = np.transpose(B)
     return A,B
 
-def run_algorithm(A,B,m_x,g_name, symm = True, verbose = False, mode = [2,3]):
+def run_algorithm(A,B,m_x,g_name, found = [], symm = True, verbose = False, mode = [2,3]):
     d, m = A.shape
     _, m_1 = B.shape
     if verbose:
@@ -87,7 +108,7 @@ def run_algorithm(A,B,m_x,g_name, symm = True, verbose = False, mode = [2,3]):
         print("[run_alg] Creating data...")
     #Create data
     #Setting parameters, and creating data
-    X = uniformSphere(d, m_x)
+    X = uniformSphere(d, m_x, found)
 
 
     assert mode == [2,3] or mode == [2] or mode == [3], "invalid mode configuration"

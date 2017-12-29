@@ -26,6 +26,14 @@ def tensor_distance_to_columns(vec,U,max_cols=np.infty, mode=2):
     return dist
 
 
+def tensor_to_vec(t, mode = 2):
+    #not unique but we map to first element positive
+    assert(mode == 2), "other modes not implemented yet"
+    if mode == 2:
+        #assume t = axa
+        a = np.diag(np.sqrt(np.abs(t))) * np.sign(t[:,0])
+    return a
+
 
 
 def vectorize_symm_tensor(t):
